@@ -1,0 +1,21 @@
+﻿# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node
+node_modules/
+
+# Azure Functions
+api/local.settings.json
+api/bin/
+api/obj/
+.azure/
+
+# SWA CLI
+swa-db-connections/
+
+# Editor/OS
+.vscode/
+.DS_Store
