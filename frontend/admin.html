@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin review &middot; TicketTriage</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <div class="brand">Ticket<span>Triage</span></div>
+    <nav class="site">
+      <a href="/index.html">Submit a ticket</a>
+      <a href="/admin.html" class="active">Admin review</a>
+    </nav>
+  </div>
+</header>
+
+<main class="admin">
+  <div class="card">
+    <h1>Ticket review</h1>
+    <p class="subtitle">Filter, review, and update ticket status.</p>
+
+    <div class="filters">
+      <input type="text" id="searchBox" placeholder="Search by name or email">
+      <select id="statusFilter">
+        <option value="">All statuses</option>
+        <option value="New">New</option>
+        <option value="Categorised">Categorised</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Resolved">Resolved</option>
+      </select>
+      <select id="categoryFilter">
+        <option value="">All categories</option>
+        <option value="IT Support">IT Support</option>
+        <option value="Facilities">Facilities</option>
+        <option value="Course Registration">Course Registration</option>
+        <option value="Student Finance">Student Finance</option>
+        <option value="Library Services">Library Services</option>
+        <option value="General Enquiry">General Enquiry</option>
+      </select>
+    </div>
+
+    <table id="ticketsTable">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Priority</th>
+          <th>Status</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody id="ticketsBody"></tbody>
+    </table>
+    <div id="emptyState" class="empty-state" style="display:none;">No tickets found.</div>
+  </div>
+</main>
+
+<script src="/js/app.js"></script>
+</body>
+</html>
