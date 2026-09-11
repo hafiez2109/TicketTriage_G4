@@ -13,6 +13,7 @@ if (ticketForm) {
       title: document.getElementById("title").value,
       description: document.getElementById("description").value,
       priority: document.getElementById("priority").value,
+      category: document.getElementById("category").value,
     };
 
     try {
@@ -29,7 +30,8 @@ if (ticketForm) {
       messageEl.className = "success";
       ticketForm.reset();
     } catch (err) {
-      messageEl.textContent = "Something went wrong submitting your ticket. Please try again.";
+      messageEl.textContent =
+        "Something went wrong submitting your ticket. Please try again.";
       messageEl.className = "error";
     }
   });
@@ -62,7 +64,9 @@ if (ticketsBody) {
     });
 
     ticketsBody.innerHTML = "";
-    document.getElementById("emptyState").style.display = filtered.length ? "none" : "block";
+    document.getElementById("emptyState").style.display = filtered.length
+      ? "none"
+      : "block";
 
     filtered
       .sort((a, b) => new Date(b.created_date) - new Date(a.created_date))
@@ -88,7 +92,9 @@ if (ticketsBody) {
           if (s === t.status) opt.selected = true;
           select.appendChild(opt);
         });
-        select.addEventListener("change", () => updateStatus(t.id, select.value));
+        select.addEventListener("change", () =>
+          updateStatus(t.id, select.value),
+        );
         statusCell.appendChild(select);
         tr.appendChild(statusCell);
 

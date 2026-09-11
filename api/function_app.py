@@ -2,7 +2,7 @@ import azure.functions as func
 import json
 import logging
 
-from shared.data_store import read_tickets, add_ticket, update_ticket_status
+from shared.data_store import get_tickets, add_ticket, update_ticket_status
 from shared.classifier import classify_ticket
 
 app = func.FunctionApp(http_auth_level=func.AuthLevel.ANONYMOUS)
@@ -25,6 +25,7 @@ def SubmitTicket(req: func.HttpRequest) -> func.HttpResponse:
     title = body.get("title")
     description = body.get("description", "")
     priority = body.get("priority", "Medium")
+    category = body.get("category", "Auto-classify")
 
     if not name or not email or not title:
         return func.HttpResponse(
@@ -33,7 +34,9 @@ def SubmitTicket(req: func.HttpRequest) -> func.HttpResponse:
             mimetype="application/json",
         )
 
-    category = classify_ticket(title, description)
+    if category == "Auto-classify":
+        category = classify_ticket(title, description)
+
     ticket = add_ticket(name, email, title, description, priority, category)
 
     return func.HttpResponse(
@@ -46,7 +49,7 @@ def SubmitTicket(req: func.HttpRequest) -> func.HttpResponse:
 @app.route(route="GetTickets", methods=["GET"])
 def GetTickets(req: func.HttpRequest) -> func.HttpResponse:
     logging.info("GetTickets triggered")
-    tickets = read_tickets()
+    tickets = get_tickets()
 
     status_filter = req.params.get("status")
     category_filter = req.params.get("category")
